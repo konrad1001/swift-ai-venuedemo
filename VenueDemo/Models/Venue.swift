@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-class Venue: Codable {
+struct Venue: Codable {
     var id: String
     var name: String
     var isFavourite: Bool
@@ -24,6 +24,10 @@ class Venue: Codable {
         self.latitude = latitude
         self.longitude = longitude
     }
+}
+
+extension Venue: Hashable {
+    
 }
 
 struct VenuesResponse: Codable {

@@ -39,4 +39,27 @@ extension VenueManager {
 
         return response.venues
     }
+
+    static var previewVenues: [Venue] {
+        return [
+            Venue(
+                id: "1",
+                name: "Venue A",
+                isFavourite: false,
+                latitude: 51.5074,
+                longitude: -0.1278),
+            Venue(
+                id: "2",
+                name: "Venue B",
+                isFavourite: false,
+                latitude: 51.5154,
+                longitude: -0.0931),
+            Venue(
+                id: "3",
+                name: "Venue C",
+                isFavourite: true,
+                latitude: 51.5223,
+                longitude:  -0.1063)
+        ]
+    }
 }
