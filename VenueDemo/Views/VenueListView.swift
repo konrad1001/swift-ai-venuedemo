@@ -25,8 +25,8 @@ struct VenueListView: View {
                             HStack {
                                 Text(venue.name)
                                 Spacer()
+                                Image(systemName: "chevron.forward")
                             }
-                            Divider()
                         }
                     })
                 }

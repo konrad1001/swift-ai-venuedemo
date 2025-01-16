@@ -7,6 +7,7 @@
 
 import MapKit
 import SwiftUI
+import AppIntents
 
 struct ContentView: View {
     @Environment(VenueManager.self) private var venueManager
@@ -66,6 +67,9 @@ struct ContentView: View {
                     VStack {
                         VenueListView(venues: venues)
 
+                        SiriTipView(intent: FilterVenuesIntent())
+                            .padding()
+
                         HStack {
                             ButtonView(type: .bar)
 
@@ -80,10 +84,11 @@ struct ContentView: View {
                             })
                         }
                     }
+                    .animation(.default, value: navigator.path)
                 }
                 .navigationBarBackButtonHidden(true)
             }
-            .animation(.default, value: navigator.path)
+
         }
         .ignoresSafeArea()
     }
