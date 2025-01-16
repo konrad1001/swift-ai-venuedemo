@@ -21,7 +21,6 @@ import SwiftUI
 
             // Index to Spotlight
             let entities = venues.map { $0.entity }
-            print("indexing: \(venues)")
             try await CSSearchableIndex.default().indexAppEntities(entities)
         }
     }
