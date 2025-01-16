@@ -8,7 +8,7 @@
 import CoreSpotlight
 import SwiftUI
 
-@Observable class VenueManager {
+@Observable class VenueManager: @unchecked Sendable {
     var venues: [Venue]
 
     init() {

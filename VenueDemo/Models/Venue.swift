@@ -26,7 +26,6 @@ struct Venue: Codable, Hashable {
     }
 }
 
-
 struct VenuesResponse: Codable {
     let venues: [Venue]
 }

@@ -6,6 +6,7 @@
 //
 
 import AppIntents
+import SwiftUI
 
 @AssistantIntent(schema: .system.search)
 struct SystemSearchIntent {
@@ -21,7 +22,7 @@ struct SystemSearchIntent {
     }
 }
 
-/// Non assistant schema. 
+// Non assistant schema. 
 struct FilterVenuesIntent: AppIntent {
     static var title = LocalizedStringResource("Filter Venues")
     static var description = IntentDescription("Filter by venue type")
@@ -37,11 +38,17 @@ struct FilterVenuesIntent: AppIntent {
         self.type = type
     }
 
-    func perform() async throws -> some IntentResult {
+    func perform() async throws -> some IntentResult & ShowsSnippetView {
         navigator.setVenueFilter(to: type)
 
-        return .result()
+        return .result(view: finishedRequestView)
+    }
+
+    var finishedRequestView: some View {
+        VStack {
+            Text("🎉")
+        }
+        .padding()
     }
 }
-
 

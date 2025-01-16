@@ -5,9 +5,9 @@
 //  Created by Konrad Painta on 1/15/25.
 //
 
+import AppIntents
 import MapKit
 import SwiftUI
-import AppIntents
 
 struct ContentView: View {
     @Environment(VenueManager.self) private var venueManager
@@ -15,16 +15,14 @@ struct ContentView: View {
 
     @State var position: MapCameraPosition = .camera(MapCamera(centerCoordinate: Locations.userDefault, distance: 10000))
 
-
     private var venues: [Venue] {
-        return VenueManager.previewVenues.filter {
+        return venueManager.venues.filter {
             if let type = navigator.applyingVenueFilter {
                 return $0.type == type
             } else {
                 return true
             }
         }
-//        return venueManager.venues
     }
 
     var body: some View {
@@ -88,7 +86,6 @@ struct ContentView: View {
                 }
                 .navigationBarBackButtonHidden(true)
             }
-
         }
         .ignoresSafeArea()
     }
@@ -119,6 +116,5 @@ struct ButtonView: View {
                 .padding()
                 .foregroundStyle(isSelected ? .black : .gray)
         })
-
     }
 }

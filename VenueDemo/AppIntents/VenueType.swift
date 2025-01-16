@@ -28,5 +28,4 @@ extension VenueType: AppEnum {
         .bar: "Bar",
         .restaurant: "Restaurant"
     ]
-
 }

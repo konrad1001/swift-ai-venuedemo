@@ -5,11 +5,9 @@
 //  Created by Konrad Painta on 1/15/25.
 //
 
-import MapKit
 import SwiftUI
 
 @Observable final class Navigator: @unchecked Sendable {
-
     var path = NavigationPath()
 
     var applyingVenueFilter: VenueType?

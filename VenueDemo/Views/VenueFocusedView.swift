@@ -18,21 +18,20 @@ struct VenueFocusedView: View {
 
             Spacer()
         }
-            .navigationBarBackButtonHidden(true)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button(action: {
-                                navigator.navigateToRoot()
-                            }) {
-                                Label("Back", systemImage: "arrow.left.circle")
-                            }
+        .navigationBarBackButtonHidden(true)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            navigator.navigateToRoot()
+                        }) {
+                            Label("Back", systemImage: "arrow.left.circle")
                         }
                     }
+                }
     }
 }
 
 #Preview {
     VenueFocusedView(venue: VenueManager.previewVenues[0])
         .environment(Navigator())
-
 }
