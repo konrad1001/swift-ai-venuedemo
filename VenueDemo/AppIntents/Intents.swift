@@ -20,3 +20,28 @@ struct SystemSearchIntent {
         return .result()
     }
 }
+
+/// Non assistant schema. 
+struct FilterVenuesIntent: AppIntent {
+    static var title = LocalizedStringResource("Filter Venues")
+    static var description = IntentDescription("Filter by venue type")
+
+    @Parameter(title: "Venue type")
+    var type: VenueType
+
+    @Dependency var navigator: Navigator
+
+    init() {}
+
+    init(type: VenueType) {
+        self.type = type
+    }
+
+    func perform() async throws -> some IntentResult {
+        navigator.setVenueFilter(to: type)
+
+        return .result()
+    }
+}
+
+

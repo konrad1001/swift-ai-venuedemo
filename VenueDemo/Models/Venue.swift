@@ -26,17 +26,6 @@ struct Venue: Codable, Hashable {
     }
 }
 
-enum VenueType: String, Codable {
-    case restaurant
-    case bar
-
-    var displayValue: String {
-        switch self {
-        case .bar: "Bars"
-        case .restaurant: "Restaurants"
-        }
-    }
-}
 
 struct VenuesResponse: Codable {
     let venues: [Venue]
