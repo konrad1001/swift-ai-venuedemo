@@ -5,6 +5,7 @@
 //  Created by Konrad Painta on 1/15/25.
 //
 
+import CoreSpotlight
 import SwiftUI
 
 @Observable class VenueManager {
@@ -17,6 +18,11 @@ import SwiftUI
     func setUp() {
         Task {
             venues = try await fetchVenues()
+
+            // Index to Spotlight
+            let entities = venues.map { $0.entity }
+            print("indexing: \(venues)")
+            try await CSSearchableIndex.default().indexAppEntities(entities)
         }
     }
 }
