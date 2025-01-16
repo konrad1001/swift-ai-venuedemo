@@ -13,6 +13,8 @@ struct VenueListView: View {
     var venues: [Venue]
 
     var body: some View {
+        @Bindable var navigator = navigator
+
         ScrollView {
             VStack {
                 ForEach(venues, id: \.id) { venue in
@@ -30,6 +32,7 @@ struct VenueListView: View {
                 }
                 .padding()
             }
+            .foregroundStyle(.black)
         }
         .navigationDestination(for: Venue.self) { venue in
             VenueFocusedView(venue: venue)
@@ -39,4 +42,5 @@ struct VenueListView: View {
 
 #Preview {
     VenueListView(venues: VenueManager.previewVenues)
+        .environment(Navigator())
 }

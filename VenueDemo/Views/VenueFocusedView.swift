@@ -15,6 +15,8 @@ struct VenueFocusedView: View {
     var body: some View {
         VStack {
             Text(venue.name)
+
+            Spacer()
         }
             .navigationBarBackButtonHidden(true)
                     .toolbar {
@@ -31,4 +33,6 @@ struct VenueFocusedView: View {
 
 #Preview {
     VenueFocusedView(venue: VenueManager.previewVenues[0])
+        .environment(Navigator())
+
 }

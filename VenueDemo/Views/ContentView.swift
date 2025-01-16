@@ -16,11 +16,14 @@ struct ContentView: View {
 
 
     private var venues: [Venue] {
-#if DEBUG
-        return VenueManager.previewVenues
-#else
-        return venueManager.venues
-#endif
+        return VenueManager.previewVenues.filter {
+            if let type = navigator.applyingVenueFilter {
+                return $0.type == type
+            } else {
+                return true
+            }
+        }
+//        return venueManager.venues
     }
 
     var body: some View {
@@ -32,6 +35,7 @@ struct ContentView: View {
                     ForEach(venues, id: \.id) { venue in
                         Marker(venue.name, coordinate: CLLocationCoordinate2D(latitude: venue.latitude, longitude: venue.longitude))
                             .tag(venue)
+                            .tint(venue.type == .bar ? .orange : .blue)
                     }
 
                     Annotation("User", coordinate: Locations.userDefault) {
@@ -59,8 +63,23 @@ struct ContentView: View {
                 }
 
                 NavigationStack(path: $navigator.path) {
-                    VenueListView(venues: venues)
+                    VStack {
+                        VenueListView(venues: venues)
 
+                        HStack {
+                            ButtonView(type: .bar)
+
+                            ButtonView(type: .restaurant)
+
+                            Button(action: {
+                                navigator.setVenueFilter(to: nil)
+                            }, label: {
+                                Text("All")
+                                    .padding()
+                                    .foregroundStyle(navigator.applyingVenueFilter == nil ? .black : .gray)
+                            })
+                        }
+                    }
                 }
                 .navigationBarBackButtonHidden(true)
             }
@@ -74,4 +93,27 @@ struct ContentView: View {
     ContentView()
         .environment(Navigator())
         .environment(VenueManager())
+}
+
+
+struct ButtonView: View {
+    @Environment(Navigator.self) private var navigator
+
+    var type: VenueType
+
+    var isSelected: Bool {
+        navigator.applyingVenueFilter == type
+    }
+
+    var body: some View {
+
+        Button(action: {
+            navigator.setVenueFilter(to: type)
+        }, label: {
+            Text(type.displayValue)
+                .padding()
+                .foregroundStyle(isSelected ? .black : .gray)
+        })
+
+    }
 }

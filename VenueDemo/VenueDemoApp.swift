@@ -5,6 +5,7 @@
 //  Created by Konrad Painta on 1/15/25.
 //
 
+import AppIntents
 import SwiftUI
 
 @main
@@ -17,6 +18,9 @@ struct VenueDemoApp: App {
         let navigator = Navigator()
 
         venueManager.setUp()
+
+        AppDependencyManager.shared.add(dependency: venueManager)
+        AppDependencyManager.shared.add(dependency: navigator)
 
         self.venueManager = venueManager
         self.navigator = navigator

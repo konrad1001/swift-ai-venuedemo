@@ -8,16 +8,11 @@
 import MapKit
 import SwiftUI
 
-@Observable class Navigator {
+@Observable final class Navigator: @unchecked Sendable {
+
     var path = NavigationPath()
 
-    var position: MapCameraPosition {
-        if let selectedVenue {
-            return .camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: selectedVenue.latitude, longitude: selectedVenue.longitude), distance: 10000))
-        } else {
-            return .camera(MapCamera(centerCoordinate: Locations.userDefault, distance: 10000))
-        }
-    }
+    var applyingVenueFilter: VenueType?
 
     var selectedVenue: Venue? {
         willSet { newValue
@@ -35,5 +30,19 @@ import SwiftUI
     func navigateToRoot() {
         selectedVenue = nil
         path = NavigationPath()
+    }
+
+    func handleSystemSearch(for query: String) {
+        if query.localizedCaseInsensitiveContains("bar") {
+            setVenueFilter(to: .bar)
+        } else if query.localizedCaseInsensitiveContains("restaurant") {
+            setVenueFilter(to: .restaurant)
+        } else {
+            setVenueFilter(to: nil)
+        }
+    }
+
+    func setVenueFilter(to type: VenueType?) {
+        applyingVenueFilter = type
     }
 }

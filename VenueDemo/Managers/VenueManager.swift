@@ -46,18 +46,21 @@ extension VenueManager {
                 id: "1",
                 name: "Venue A",
                 isFavourite: false,
+                type: .bar,
                 latitude: 51.5074,
                 longitude: -0.1278),
             Venue(
                 id: "2",
                 name: "Venue B",
                 isFavourite: false,
+                type: .restaurant,
                 latitude: 51.5154,
                 longitude: -0.0931),
             Venue(
                 id: "3",
                 name: "Venue C",
                 isFavourite: true,
+                type: .restaurant,
                 latitude: 51.5223,
                 longitude:  -0.1063)
         ]
